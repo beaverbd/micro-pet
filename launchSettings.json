@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "gatewaywebapi",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "accountwebapi": "StartDebugging",
+        "authwebapi": "StartDebugging",
+        "gatewaywebapi": "StartDebugging",
+        "healthwebapi": "StartDebugging",
+        "productswebapi": "StartDebugging",
+        "rabbitmq": "StartWithoutDebugging"
+      }
+    }
+  }
+}
