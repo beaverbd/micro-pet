@@ -3,13 +3,20 @@ version: '3.4'
 services:
   accountwebapi:
     image: ${DOCKER_REGISTRY-}accountwebapi
-    container_name: 'account'
+    container_name: 'accounts'
     build:
       context: .
       dockerfile: AccountWebApi/Dockerfile      
     networks:
         - rabbitmq_net
         - default
+        - account_data
+
+  accountdb:
+    image: postgres:14.4
+    container_name: 'accountdb'
+    networks: 
+        - account_data
   
   productswebapi:
     image: ${DOCKER_REGISTRY-}productswebapi
@@ -20,6 +27,13 @@ services:
     networks:
         - rabbitmq_net
         - default
+        - products_data
+
+  productsdb:
+    image: postgres:14.4
+    container_name: 'productsdb'
+    networks: 
+        - products_data        
 
   authwebapi:
     image: ${DOCKER_REGISTRY-}authwebapi
@@ -29,6 +43,13 @@ services:
         dockerfile: AuthWebApi/Dockerfile
     networks:
         - default
+        - auth_data
+
+  authdb:
+    image: postgres:14.4
+    container_name: 'authdb'
+    networks: 
+        - auth_data
   
   healthwebapi:
     image: ${DOCKER_REGISTRY-}healthwebapi
@@ -38,6 +59,7 @@ services:
         dockerfile: HealthWebApi/Dockerfile
     networks:
         - default
+        - rabbitmq_net
 
   gatewaywebapi:
     image: ${DOCKER_REGISTRY-}gatewaywebapi
@@ -55,8 +77,8 @@ services:
     image: rabbitmq:3.10
     container_name: 'rabbitmq'
     ports:
-        - 5672:5672
-        - 15672:15672
+        - "5672"
+        - "15672"
     volumes:
         - ~/.docker-conf/rabbuitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
@@ -67,6 +89,12 @@ networks:
     rabbitmq_net:
         driver: bridge
     default:
+        driver: bridge
+    account_data:
+        driver: bridge
+    auth_data:
+        driver: bridge
+    products_data:
         driver: bridge
         
 

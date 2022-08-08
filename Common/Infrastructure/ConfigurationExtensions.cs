@@ -1,6 +1,5 @@
 ﻿using Common.Providers;
 using Common.Providers.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Common.Infrastructure;
 
@@ -12,4 +11,3 @@ public static class ConfigurationExtensions
         return services;
     }
 }
-

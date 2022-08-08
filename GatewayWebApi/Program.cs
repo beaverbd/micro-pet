@@ -6,6 +6,7 @@ using Ocelot.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureAppConfiguration((context, configBuilder) =>
 {
+    configBuilder.AddJsonFile(Path.Combine($"configuration-ocelot.json"));
     configBuilder.AddJsonFile(Path.Combine($"configuration-ocelot.{context.HostingEnvironment.EnvironmentName}.json"));
 });
 
