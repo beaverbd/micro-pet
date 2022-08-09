@@ -37,7 +37,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/health",
+      "UpstreamPathTemplate": "/health",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "health"
     },
@@ -50,7 +50,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/health/{everything}",
+      "UpstreamPathTemplate": "/health/{everything}",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "health"
     },
@@ -63,7 +63,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/healthchecks-api/{everything}",
+      "UpstreamPathTemplate": "/healthchecks-api/{everything}",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "health"
     },
@@ -76,7 +76,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/healthchecks-api",
+      "UpstreamPathTemplate": "/healthchecks-api",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "health"
     },
