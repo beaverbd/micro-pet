@@ -21,6 +21,6 @@ app.UseRouting()
     .UseEndpoints(config => config.UseServiceHealthChecksRouting());
 app.UseServiceHealthChecks();
 
-app.MapGet("", () => "Hi from auth");
+app.MapGet("api/v1/", () => "Hi from auth");
 
 app.Run();

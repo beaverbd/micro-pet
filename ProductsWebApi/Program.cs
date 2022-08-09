@@ -21,6 +21,6 @@ app.UseRouting()
     .UseEndpoints(config => config.UseServiceHealthChecksRouting());
 app.UseServiceHealthChecks();
 
-app.MapGet("", () => "Hi from products");
+app.MapGet("api/v1/", () => "Hi from products");
 
 app.Run();

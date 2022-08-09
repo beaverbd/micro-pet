@@ -22,6 +22,6 @@ app.UseEndpoints(config => config.MapHealthChecksUI(c =>
     c.ResourcesPath = "/health/ui/resources";
 }));
 app.UseServiceSwagger();
-app.MapGet("", () => "Hi from health");
+app.MapGet("api/v1/", () => "Hi from health");
 
 app.Run();

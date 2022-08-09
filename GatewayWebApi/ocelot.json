@@ -1,11 +1,12 @@
 {
   "Routes": [
+    // ACCOUNTS
     {
       "DownstreamPathTemplate": "/api/v1/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "account",
+          "Host": "accounts",
           "Port": 80
         }
       ],
@@ -18,7 +19,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "account",
+          "Host": "accounts",
           "Port": 80
         }
       ],
@@ -26,6 +27,7 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "SwaggerKey": "accounts"
     },
+    // HEALTH
     {
       "DownstreamPathTemplate": "/healthchecks-ui",
       "DownstreamScheme": "http",
@@ -77,6 +79,33 @@
       "UpstreamPathTemplate": "/api/v1/healthchecks-api",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "health"
+    },
+    // PRODUCTS
+    {
+      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/products/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "products"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "products",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/products",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "products"
     }
   ],
   "SwaggerEndPoints": [
@@ -86,7 +115,7 @@
         {
           "Name": "Accounts API",
           "Version": "v1",
-          "Url": "http://account/swagger/v1/swagger.json"
+          "Url": "http://accounts/swagger/v1/swagger.json"
         }
       ]
     },
@@ -97,6 +126,16 @@
           "Name": "Health API",
           "Version": "v1",
           "Url": "http://health/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "products",
+      "Config": [
+        {
+          "Name": "Products API",
+          "Version": "v1",
+          "Url": "http://products/swagger/v1/swagger.json"
         }
       ]
     }
