@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountWebApi", "AccountWebApi\AccountWebApi.csproj", "{A8063E9B-D88E-4CBB-9C21-6E4D2143A8CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountWebApi", "AccountWebApi\AccountWebApi.csproj", "{A8063E9B-D88E-4CBB-9C21-6E4D2143A8CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{A1CFCB40-6F33-4BA2-BF96-8BC9AD33F5C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D8494F7A-8036-4E49-BC80-084A379411F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C4F04DCE-CA8A-4F1D-9C04-4834E024754D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{C4F04DCE-CA8A-4F1D-9C04-4834E024754D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{53E6F5CF-121A-4366-9735-B94FAD51B47A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsWebApi", "ProductsWebApi\ProductsWebApi.csproj", "{53BDEE6F-7C3A-49B6-B4CE-A7992B257A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductsWebApi", "ProductsWebApi\ProductsWebApi.csproj", "{53BDEE6F-7C3A-49B6-B4CE-A7992B257A6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Health", "Health", "{A5B68C31-E170-46BB-807D-56BC8A219436}"
 EndProject
@@ -27,13 +27,15 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{74126BD9-8793-4704-B7EE-B7E7C8385E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthWebApi", "AuthWebApi\AuthWebApi.csproj", "{8189228C-5C91-4932-9CF8-2AD77A83C7ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthWebApi", "AuthWebApi\AuthWebApi.csproj", "{8189228C-5C91-4932-9CF8-2AD77A83C7ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthWebApi", "HealthWebApi\HealthWebApi.csproj", "{C273FC76-259F-4EAE-81E6-66F0D050FA19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthWebApi", "HealthWebApi\HealthWebApi.csproj", "{C273FC76-259F-4EAE-81E6-66F0D050FA19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{53317D7E-DB16-46E7-AA33-BB3A01CE0120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayWebApi", "GatewayWebApi\GatewayWebApi.csproj", "{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayWebApi", "GatewayWebApi\GatewayWebApi.csproj", "{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products.App", "..\Products.App\Products.App.csproj", "{3D5DE0AD-AB02-4E89-9921-D730E49223C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D5DE0AD-AB02-4E89-9921-D730E49223C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D5DE0AD-AB02-4E89-9921-D730E49223C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D5DE0AD-AB02-4E89-9921-D730E49223C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D5DE0AD-AB02-4E89-9921-D730E49223C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{8189228C-5C91-4932-9CF8-2AD77A83C7ED} = {74126BD9-8793-4704-B7EE-B7E7C8385E6B}
 		{C273FC76-259F-4EAE-81E6-66F0D050FA19} = {A5B68C31-E170-46BB-807D-56BC8A219436}
 		{AB6F54D9-C1B5-42AB-830C-FFEAA639FA57} = {53317D7E-DB16-46E7-AA33-BB3A01CE0120}
+		{3D5DE0AD-AB02-4E89-9921-D730E49223C4} = {53E6F5CF-121A-4366-9735-B94FAD51B47A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF8B1BD4-76CD-49BE-B78D-05E9509811C4}
