@@ -3,9 +3,12 @@ using Common.DataAccess;
 using Common.Extensions;
 using Common.Infrastructure;
 using Common.Logging;
-using Products.App.Migrations;
-using Products.App.Repositories;
-using Products.App.Repositories.Interfaces;
+using Connectors;
+using Connectors.Products;
+using Orders.App.HostedServices;
+using Orders.App.Migrations;
+using Orders.App.Repositories;
+using Orders.App.Repositories.Interfaces;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +25,12 @@ builder.Services.AddCommonServices();
 builder.Services.AddServiceSwagger(typeof(Program));
 builder.Services.AddServiceHealthChecks(config);
 builder.Services.AddMigrations(config.Database, typeof(MigrationBase));
-builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddProductsApi();
+builder.Services.AddHostedService<FetchProductsHostedService>();
 
 var app = builder.Build();
-app.MigrateDatabase("productsdb");
+app.MigrateDatabase("ordersdb");
 
 // Configure
 
@@ -35,7 +40,8 @@ app.UseRouting()
     .UseEndpoints(config => config.UseServiceHealthChecksRouting());
 app.UseServiceHealthChecks();
 
-app.MapGet("api/v1/products", async (IProductsRepository repository) => await repository.GetAllAsync());
+app.MapGet("api/v1/orders", async (IOrdersRepository repository) => await repository.GetAllAsync());
+app.MapGet("api/v1/orders/products", async (IProductsApi products) => await products.GetProducts());
 
 app.Run();
 Log.Information($"Started {config.Service.Name}!");

@@ -41,6 +41,28 @@ services:
     networks: 
         - products_data        
 
+  orderswebapi:
+    image: ${DOCKER_REGISTRY-}orderswebapi
+    container_name: 'orders'
+    build:
+        context: .
+        dockerfile: OrdersWebApi/Dockerfile
+    networks:
+        - rabbitmq_net
+        - default
+        - orders_data
+        - graylog
+    depends_on:
+        - "ordersdb"
+        - "logs_graylog"
+        - "productswebapi"
+
+  ordersdb:
+    image: postgres:14.4
+    container_name: 'ordersdb'
+    networks: 
+        - orders_data        
+
   authwebapi:
     image: ${DOCKER_REGISTRY-}authwebapi
     container_name: 'auth'
@@ -68,6 +90,7 @@ services:
     networks:
         - default
         - rabbitmq_net
+        - graylog_inner
 
   gatewaywebapi:
     image: ${DOCKER_REGISTRY-}gatewaywebapi
@@ -131,7 +154,7 @@ services:
         - GRAYLOG_PASSWORD_SECRET=ytte222eu2eu2ue2ueueeueueue
         # Password: admin
         - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-        - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+        - GRAYLOG_HTTP_EXTERNAL_URI=http://localhost:9000/
         - GRAYLOG_MONGODB_URI=mongodb://mongo_graylog:27017/graylog
         - GRAYLOG_ELASTICSEARCH_HOSTS=http://elasticgraylog:9200
     restart: always
@@ -164,10 +187,10 @@ networks:
         driver: bridge
     products_data:
         driver: bridge
+    orders_data:
+        driver: bridge
     graylog_inner:
         driver: bridge
     graylog:
-        driver: bridge
-        
-
+        driver: bridge     
     

@@ -39,4 +39,11 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
 
+  orderswebapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
 
+  ordersdb:
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres

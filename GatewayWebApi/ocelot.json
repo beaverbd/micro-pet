@@ -106,6 +106,33 @@
       "UpstreamPathTemplate": "/api/v1/products",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "SwaggerKey": "products"
+    },
+    // ORDERS
+    {
+      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "orders"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orders",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "orders"
     }
   ],
   "SwaggerEndPoints": [
@@ -136,6 +163,16 @@
           "Name": "Products API",
           "Version": "v1",
           "Url": "http://products/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "orders",
+      "Config": [
+        {
+          "Name": "Orders API",
+          "Version": "v1",
+          "Url": "http://orders/swagger/v1/swagger.json"
         }
       ]
     }

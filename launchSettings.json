@@ -12,7 +12,15 @@
         "gatewaywebapi": "StartDebugging",
         "healthwebapi": "StartDebugging",
         "productswebapi": "StartDebugging",
-        "rabbitmq": "StartWithoutDebugging"
+        "rabbitmq": "StartWithoutDebugging",
+        "accountdb": "StartWithoutDebugging",
+        "authdb": "StartWithoutDebugging",
+        "logs_elasticsearch": "StartWithoutDebugging",
+        "logs_graylog": "StartWithoutDebugging",
+        "logs_mongodb": "StartWithoutDebugging",
+        "ordersdb": "StartWithoutDebugging",
+        "orderswebapi": "StartDebugging",
+        "productsdb": "StartWithoutDebugging"
       }
     }
   }
