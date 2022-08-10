@@ -10,6 +10,10 @@ public static class DataAccessExtensions
         return services.AddLogging(x => x.AddFluentMigratorConsole())
             .AddFluentMigratorCore()
             .ConfigureRunner(x => x.AddPostgres()
+                .ConfigureGlobalProcessorOptions(options =>
+                {
+                    options.ProviderSwitches = "Force Quote=false";
+                })
                 .WithGlobalConnectionString(databaseConfig.ConnectionString)
                 .ScanIn(assemblyType.Assembly));
     }
