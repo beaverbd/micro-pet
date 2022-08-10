@@ -11,6 +11,8 @@ services:
         - rabbitmq_net
         - default
         - account_data
+    depends_on:
+        - "accountdb"
 
   accountdb:
     image: postgres:14.4
@@ -28,6 +30,10 @@ services:
         - rabbitmq_net
         - default
         - products_data
+        - graylog
+    depends_on:
+        - "productsdb"
+        - "logs_graylog"
 
   productsdb:
     image: postgres:14.4
@@ -44,6 +50,8 @@ services:
     networks:
         - default
         - auth_data
+    depends_on:
+        - "authdb"
 
   authdb:
     image: postgres:14.4
@@ -85,6 +93,66 @@ services:
     networks:
         - rabbitmq_net
 
+  logs_mongodb:
+    container_name: mongo_graylog
+    image: mongo:3
+    volumes:
+        - ~/logs/graylog/mongodb:/data/db
+    networks:
+        - graylog_inner
+  logs_elasticsearch:
+    container_name: elasticgraylog
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    volumes: 
+        - ~/logs/graylog/elasticsearchdata:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - cluster.routing.allocation.disk.watermark.flood_stage=1gb
+      - cluster.routing.allocation.disk.watermark.low=3gb
+      - cluster.routing.allocation.disk.watermark.high=2gb
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+        resources:
+          limits:
+            memory: 1g
+    networks:
+        - graylog_inner
+  logs_graylog:
+    image: graylog/graylog:4.3
+    container_name: graylog
+    environment:
+      # CHANGE ME (must be at least 16 characters)!
+        - GRAYLOG_PASSWORD_SECRET=ytte222eu2eu2ue2ueueeueueue
+        # Password: admin
+        - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+        - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+        - GRAYLOG_MONGODB_URI=mongodb://mongo_graylog:27017/graylog
+        - GRAYLOG_ELASTICSEARCH_HOSTS=http://elasticgraylog:9200
+    restart: always
+    entrypoint: /usr/bin/tini -- wait-for-it elasticgraylog:9200 --  /docker-entrypoint.sh
+    depends_on:
+        - logs_mongodb
+        - logs_elasticsearch
+    networks:
+        - graylog_inner
+        - graylog
+    ports:
+        - 9000:9000
+        # Syslog TCP
+        #- 1514:1514
+        # Syslog UDP
+        #- 1514:1514/udp
+        # GELF TCP
+        #- 12201:12201
+        # GELF UDP
+        #- 12201:12201/udp
+
 networks:
     rabbitmq_net:
         driver: bridge
@@ -95,6 +163,10 @@ networks:
     auth_data:
         driver: bridge
     products_data:
+        driver: bridge
+    graylog_inner:
+        driver: bridge
+    graylog:
         driver: bridge
         
 

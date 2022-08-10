@@ -2,15 +2,20 @@ using Common.Configs;
 using Common.DataAccess;
 using Common.Extensions;
 using Common.Infrastructure;
+using Common.Logging;
 using Products.App.Migrations;
 using Products.App.Repositories;
 using Products.App.Repositories.Interfaces;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Log.Logger = LoggingSetup.CreateLogger(builder.Configuration);
+builder.Host.UseSerilog();
+var config = builder.Configuration.Get<ConfigBase>();
+Log.Information($"Starting {config.Service.Name}..");
 // ConfigureServices
 
-var config = builder.Configuration.Get<ConfigBase>();
+
 builder.Services.Configure<ConfigBase>(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCommonServices();
@@ -32,3 +37,4 @@ app.UseServiceHealthChecks();
 app.MapGet("api/v1/", async (IProductsRepository repository) => await repository.GetAllAsync());
 
 app.Run();
+Log.Information($"Started {config.Service.Name}!");
