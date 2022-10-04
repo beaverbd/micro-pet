@@ -15,7 +15,7 @@ public static class MigrationManager
             migrationService.ListMigrations();
             migrationService.MigrateUp();
         }
-        catch
+        catch(Exception ex)
         {
             // TODO log 
             throw;

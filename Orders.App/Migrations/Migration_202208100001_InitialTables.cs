@@ -7,8 +7,9 @@ public class Migration_202208100001_InitialTables : Migration
 {
     public override void Up()
     {
+        Execute.Sql("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";");
         Create.Table("Orders")
-            .WithColumn("Id").AsGuid().PrimaryKey().WithDefaultValue(Guid.NewGuid())
+            .WithColumn("Id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
             .WithColumn("Status").AsByte().NotNullable();
     }
 

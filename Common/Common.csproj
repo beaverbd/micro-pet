@@ -10,6 +10,8 @@
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.5" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
+		<PackageReference Include="Convey.MessageBrokers.CQRS" Version="1.0.541" />
+		<PackageReference Include="Convey.MessageBrokers.RabbitMQ" Version="1.0.541" />
 		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="FluentMigrator" Version="3.3.2" />
 		<PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />

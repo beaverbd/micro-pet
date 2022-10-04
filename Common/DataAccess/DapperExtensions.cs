@@ -14,5 +14,15 @@ namespace Dapper
             var result = await connection.QueryAsync<TEntity>(query, param);
             return result;
         }
+
+        public static async Task<int> ExecuteWithMetricAsync(this IDbConnection? connection, string query, object param)
+        {
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
+
+            using var timing = Operation.Time("SQL query {query}", query);
+            var result = await connection.ExecuteAsync(query, param);
+            return result;
+        }
     }
 }

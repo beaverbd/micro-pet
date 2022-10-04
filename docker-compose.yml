@@ -26,14 +26,15 @@ services:
     build:
         context: .
         dockerfile: ProductsWebApi/Dockerfile
-    networks:
-        - rabbitmq_net
+    networks:        
         - default
         - products_data
+        - rabbitmq_net
         - graylog
     depends_on:
         - "productsdb"
         - "logs_graylog"
+        - "rabbitmq"
 
   productsdb:
     image: postgres:14.4
@@ -47,15 +48,16 @@ services:
     build:
         context: .
         dockerfile: OrdersWebApi/Dockerfile
-    networks:
-        - rabbitmq_net
+    networks:        
         - default
         - orders_data
+        - rabbitmq_net
         - graylog
     depends_on:
         - "ordersdb"
         - "logs_graylog"
         - "productswebapi"
+        - "rabbitmq"
 
   ordersdb:
     image: postgres:14.4
@@ -105,11 +107,11 @@ services:
         - default
 
   rabbitmq:
-    image: rabbitmq:3.10
+    image: rabbitmq:3.10-management
     container_name: 'rabbitmq'
     ports:
-        - "5672"
-        - "15672"
+        - 5672:5672
+        - 15672:15672
     volumes:
         - ~/.docker-conf/rabbuitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
